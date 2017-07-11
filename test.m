@@ -35,13 +35,14 @@ out ten is $ten
 
 # Divide, the value is stored in the 1th variable
 div ten 3
+out $ten
 
 # Multiply
 mul ten 3
+out $ten
 
 # Modulo
 mod ten 3
-
 out $ten
 
 end
