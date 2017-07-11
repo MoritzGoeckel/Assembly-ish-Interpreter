@@ -22,9 +22,9 @@ set counter 0
 add counter 1
 out counter is $counter
 if $counter < 10
+goto 22
 # Goto is used for conditions and for loops
 # Parameter is the line number
-goto 22
 
 out counter is now 10 -> $counter
 
