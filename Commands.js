@@ -30,15 +30,18 @@ module.exports = {
         context.nextLine++;  
     },
     "mul":function(line, args, context){
-        context[args[0]] *= parseFloat(args[1]);
+        let rargs = resolveArgs(args, context);
+        context[rargs[0]] *= parseFloat(rargs[1]);
         context.nextLine++;  
     },
     "div":function(line, args, context){
-        context[args[0]] /= parseFloat(args[1]);
+        let rargs = resolveArgs(args, context);
+        context[rargs[0]] /= parseFloat(rargs[1]);
         context.nextLine++;  
     },
     "mod":function(line, args, context){
-        context[args[0]] %= parseFloat(args[1]);
+        let rargs = resolveArgs(args, context);
+        context[rargs[0]] %= parseFloat(rargs[1]);
         context.nextLine++;  
     },
     "set":function(line, args, context){
