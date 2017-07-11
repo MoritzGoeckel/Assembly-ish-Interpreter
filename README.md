@@ -3,7 +3,7 @@ This is an Interpreter for a assembly like language in Nodejs.
 
 ## Running the interpreter
 An example on how to run the interpreter check out the main.js
-´´´js
+```js
 //Including the Interpreter
 const Program = require("./Program.js");
 const fs = require('fs')
@@ -17,11 +17,11 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
     let p = new Program(data); // <-- Create a program with 
     // the source code and execute it
 });
-´´´
+```
 
 ## Example source code of a program
 This is an interpreter for a custom language which is highly inspired by assembly
-´´´
+```
 # This is how a comment looks
 
 # Output of a string
@@ -71,4 +71,4 @@ out $ten
 end
 
 # this is the end of the file
-´´´
+```
