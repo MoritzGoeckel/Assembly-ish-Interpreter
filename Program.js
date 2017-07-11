@@ -15,7 +15,7 @@ module.exports = class{
         
         let lines = text.split("\r\n");
 
-        while(context.nextLine < lines.length && context.end != true){
+        while(context.nextLine < lines.length && context.__end != true){
             let line = lines[context.nextLine];
             if(isLineExecutable(line)){
                 line += " ";

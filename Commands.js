@@ -29,12 +29,25 @@ module.exports = {
 
         context.nextLine++;  
     },
+    "mul":function(line, args, context){
+        context[args[0]] *= parseFloat(args[1]);
+        context.nextLine++;  
+    },
+    "div":function(line, args, context){
+        context[args[0]] /= parseFloat(args[1]);
+        context.nextLine++;  
+    },
+    "mod":function(line, args, context){
+        context[args[0]] %= parseFloat(args[1]);
+        context.nextLine++;  
+    },
     "set":function(line, args, context){
-        let f = parseFloat(args[1]);
+        let rargs = resolveArgs(args, context);
+        let f = parseFloat(rargs[1]);
         if(isNaN(f) == false)
-            context[args[0]] = f;
+            context[rargs[0]] = f;
         else
-            context[args[0]] = args[1];
+            context[rargs[0]] = rargs[1];
 
         context.nextLine++;  
     },
@@ -45,7 +58,7 @@ module.exports = {
         context.nextLine++;
     },
     "end":function(line, args, context){
-        context.end = true;
+        context.__end = true;
     },
 
 }

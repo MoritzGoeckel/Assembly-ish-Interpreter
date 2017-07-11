@@ -15,7 +15,13 @@ out counter is $counter
 if $counter < 10
 goto 13
 
-out counter is now probably 10 -> $counter
+out counter is now 10 -> $counter
+
+set ten $counter
+out ten is $ten
+
+mod ten 3
+out $ten
 
 end
 
