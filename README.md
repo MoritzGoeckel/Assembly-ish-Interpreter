@@ -73,3 +73,31 @@ end
 
 # this is the end of the file
 ```
+
+## Extending the interpreter
+Just extend the commands object in the Commands.js. Key is the command and value is a function recieving the entire line string, the arguments array and the context object as parameters.
+
+The function can change the context, end the software and decide which line is the next to execute.
+
+### Example commands
+```js
+// Ending the software
+"end":function(line, args, context){
+    context.__end = true; // Ending the software
+},
+// Doing an output
+"out":function(line, args, context){
+    // Replacing $variables with the value
+    let rargs = resolveArgs(args, context); 
+    console.log(rargs.join(" "));
+
+    context.nextLine++; // Going to the next line
+},
+// Multiplication
+"mul":function(line, args, context){
+    let rargs = resolveArgs(args, context);
+    // The context is a key value dictionary
+    context[rargs[0]] *= parseFloat(rargs[1]); // Changing the context
+    context.nextLine++;  
+}
+```

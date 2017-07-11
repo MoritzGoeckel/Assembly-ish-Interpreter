@@ -66,6 +66,7 @@ module.exports = {
 
 }
 
+// Replacing $variable with the variable value
 function resolveArgs(args, context){
     let resolved = [];
 
