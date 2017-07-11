@@ -19,7 +19,7 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
 });
 ```
 
-## Example source code of a program
+## Example program
 This is an interpreter for a custom language which is highly inspired by assembly
 ```
 # This is how a comment looks
