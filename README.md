@@ -46,7 +46,7 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
 ```
 ## Example program
 ```
-# This is how a comment looks
+; This is how a comment looks
 mov rx 0
 
 ; Loop
