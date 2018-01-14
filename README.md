@@ -1,14 +1,12 @@
 # Assembly-ish interpreter
 This is an Interpreter for a assembly like language in Node.js
 ## List of commands
-* check num|reg op num|reg
-* jmp label
+* mov reg|mem num|reg|mem
 * add reg num|reg
 * sub reg num|reg
 * mul reg num|reg
 * div reg num|reg
 * mod reg num|reg
-* mov reg|mem num|reg|mem
 * out num|reg
 * end
 * push num|reg
@@ -18,7 +16,16 @@ This is an Interpreter for a assembly like language in Node.js
 * or reg num|reg
 * xor reg num|reg
 * not reg
-
+* cmp num|reg num|reg
+* je label
+* jne label
+* jg label
+* jge label
+* jl label
+* jle label
+* jmp label
+* check num|reg op num|reg
+* dbg
 ## Running the interpreter
 An example on how to run the interpreter check out the main.js
 ```js
@@ -36,7 +43,6 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
     // the source code and execute it
 });
 ```
-
 ## Example program
 ```
 # This is how a comment looks
@@ -54,8 +60,8 @@ out rx
 outstart:
 pop ra
 out ra
-check ra > 1
-jmp outstart
+cmp ra 1
+jg outstart
 
 # Reading / Writing Memory
 mov rx 5
@@ -72,13 +78,11 @@ mov ry 1
 xor rx ry
 out rx
 ```
-
 ## Extending the interpreter
 Just extend the commands object in the Commands.js. Key is the command and value is a function receiving the entire line string, the arguments array and the context object as parameters.
 
 The function can change the context, end the software and decide which line is the next to execute.
-
-### Example commands
+### Implementing commands
 ```js
 // Ending the software
 "end":function(line, args, context){

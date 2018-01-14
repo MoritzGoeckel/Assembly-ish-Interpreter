@@ -16,6 +16,49 @@ module.exports = {
         else
             context.nextLine += 2;  
     },
+    "cmp":function(line, args, context){
+        let left = getRightHandValue(args[0], context);
+        let right = getRightHandValue(args[1], context);
+        context.cmpflag = left - right;
+
+        context.nextLine++;
+    },
+    "je":function(line, args, context){
+        if(context.cmpflag == 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
+    "jne":function(line, args, context){
+        if(context.cmpflag != 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
+    "jg":function(line, args, context){
+        if(context.cmpflag > 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
+    "jge":function(line, args, context){
+        if(context.cmpflag >= 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
+    "jl":function(line, args, context){
+        if(context.cmpflag < 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
+    "jle":function(line, args, context){
+        if(context.cmpflag <= 0)
+            context.nextLine = context.labels[args[0]];
+        else
+            context.nextLine++;
+    },
     "jmp":function(line, args, context){
         context.nextLine = context.labels[args[0]];
     },
