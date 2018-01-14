@@ -96,19 +96,25 @@ module.exports = {
         context.nextLine++;
     },
     "or":function(line, args, context){
-        let output = getRightHandValue(args[0], context) > 0 || getRightHandValue(args[1], context) ? 1 : 0;
+        let output = getRightHandValue(args[0], context) > 0 || getRightHandValue(args[1], context) > 0 ? 1 : 0;
         setRegister(args[0], output, context);
 
         context.nextLine++;
     },
     "and":function(line, args, context){
-        let output = getRightHandValue(args[0], context) > 0 && getRightHandValue(args[1], context) ? 1 : 0;
+        let output = getRightHandValue(args[0], context) > 0 && getRightHandValue(args[1], context) > 0 ? 1 : 0;
         setRegister(args[0], output, context);
 
         context.nextLine++;
     },
     "xor":function(line, args, context){
-        let output = getRightHandValue(args[0], context) > 0 != getRightHandValue(args[1], context) ? 1 : 0;
+        let output = getRightHandValue(args[0], context) > 0 != getRightHandValue(args[1], context) > 0 ? 1 : 0;
+        setRegister(args[0], output, context);
+
+        context.nextLine++;
+    },
+    "not":function(line, args, context){
+        let output = getRightHandValue(args[0], context) > 0 ? 0 : 1;
         setRegister(args[0], output, context);
 
         context.nextLine++;

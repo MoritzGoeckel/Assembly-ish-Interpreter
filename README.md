@@ -1,5 +1,5 @@
 # Assembly-ish interpreter
-This is an Interpreter for a assembly like language in NodeJS
+This is an Interpreter for a assembly like language in Node.js
 ## List of commands
 * check num|reg op num|reg
 * jmp label
@@ -17,6 +17,7 @@ This is an Interpreter for a assembly like language in NodeJS
 * and reg num|reg
 * or reg num|reg
 * xor reg num|reg
+* not reg
 
 ## Running the interpreter
 An example on how to run the interpreter check out the main.js
@@ -73,7 +74,7 @@ out rx
 ```
 
 ## Extending the interpreter
-Just extend the commands object in the Commands.js. Key is the command and value is a function recieving the entire line string, the arguments array and the context object as parameters.
+Just extend the commands object in the Commands.js. Key is the command and value is a function receiving the entire line string, the arguments array and the context object as parameters.
 
 The function can change the context, end the software and decide which line is the next to execute.
 
