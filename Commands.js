@@ -1,80 +1,109 @@
 module.exports = {
 
-    "if":function(line, args, context){
-        let rargs = resolveArgs(args, context);
+    "check":function(line, args, context){
+        let left = getRightHandValue(args[0], context);
+        let right = getRightHandValue(args[2], context);
         
         if(
-            (rargs[0] > rargs[2] && rargs[1] == ">") ||
-            (rargs[0] < rargs[2] && rargs[1] == "<") ||
-            (rargs[0] == rargs[2] && rargs[1] == "==") ||
-            (rargs[0] <= rargs[2] && rargs[1] == "<=") ||
-            (rargs[0] != rargs[2] && rargs[1] == "!=") ||            
-            (rargs[0] >= rargs[2] && rargs[1] == ">=")              
+            (left > right && args[1] == ">") ||
+            (left < right && args[1] == "<") ||
+            (left == right && args[1] == "==") ||
+            (left <= right && args[1] == "<=") ||
+            (left != right && args[1] == "!=") ||            
+            (left >= right && args[1] == ">=")              
         )
             context.nextLine++;
         else
             context.nextLine += 2;  
     },
-    "goto":function(line, args, context){
-        context.nextLine = parseInt(args[0]) - 1;  
+    "jmp":function(line, args, context){
+        context.nextLine = context.labels[args[0]];
     },
     "add":function(line, args, context){
-        if(context[args[0]] == undefined)
-            context[args[0]] = 0;
-        
-        if(typeof context[args[0]] === 'number')
-            context[args[0]] += parseFloat(args[1]);
-        else
-            context[args[0]] += args[1];
-
+        setRegister(
+            args[0], 
+            getRightHandValue(args[0], context) + getRightHandValue(args[1], context), 
+            context
+        );
+        context.nextLine++;  
+    },
+    "sub":function(line, args, context){
+        setRegister(
+            args[0], 
+            getRightHandValue(args[0], context) * getRightHandValue(args[1], context), 
+            context
+        );
         context.nextLine++;  
     },
     "mul":function(line, args, context){
-        let rargs = resolveArgs(args, context);
-        context[rargs[0]] *= parseFloat(rargs[1]);
+        setRegister(
+            args[0], 
+            getRightHandValue(args[0], context) * getRightHandValue(args[1], context), 
+            context
+        );
         context.nextLine++;  
     },
     "div":function(line, args, context){
-        let rargs = resolveArgs(args, context);
-        context[rargs[0]] /= parseFloat(rargs[1]);
+        setRegister(
+            args[0], 
+            getRightHandValue(args[0], context) / getRightHandValue(args[1], context), 
+            context
+        );
         context.nextLine++;  
     },
     "mod":function(line, args, context){
-        let rargs = resolveArgs(args, context);
-        context[rargs[0]] %= parseFloat(rargs[1]);
+        setRegister(
+            args[0], 
+            getRightHandValue(args[0], context) % getRightHandValue(args[1], context), 
+            context
+        );
         context.nextLine++;  
     },
-    "set":function(line, args, context){
-        let rargs = resolveArgs(args, context);
-        let f = parseFloat(rargs[1]);
-        if(isNaN(f) == false)
-            context[rargs[0]] = f;
-        else
-            context[rargs[0]] = rargs[1];
-
+    "mov":function(line, args, context){
+        setRegister(args[0], getRightHandValue(args[1], context), context);
         context.nextLine++;  
     },
     "out":function(line, args, context){
-        let rargs = resolveArgs(args, context);
-        console.log(rargs.join(" "));
-
+        console.log(getRightHandValue(args[0], context));
         context.nextLine++;
     },
     "end":function(line, args, context){
         context.__end = true;
     },
+    "push":function(line, args, context){
+        context.stack.push(getRightHandValue(args[0], context));
+        context.nextLine++;
+    },
+    "pop":function(line, args, context){
+        let returnvalue = context.stack.pop();
+        if(returnvalue == undefined)
+            throw "Stack is empty, unable to pop";
 
+        setRegister(args[0], returnvalue, context);
+
+        context.nextLine++;
+    }
 }
 
-// Replacing $variable with the variable value
-function resolveArgs(args, context){
-    let resolved = [];
+function getRightHandValue(value, context){
+    if(value.startsWith("r") && context[value] != undefined)
+        return context[value];
+    
+    let number = parseFloat(value);
+    if(isNaN(number) == false)
+        return number;
 
-    for(let a in args)
-        if(args[a] != "" && args[a].startsWith("$") && context[args[a].substring(1)] != undefined)
-            resolved.push(context[args[a].substring(1)]);
-        else
-            resolved.push(args[a]);
+    throw value + " is not a right hand value";
+}
 
-    return resolved;
+function setRegister(name, value, context){
+    if (name.toLowerCase().startsWith("r") && 
+            name.length == 2 && 
+            "abcxyz".indexOf(name.substr(1).toLowerCase() != -1) &&
+            isNaN(parseFloat(value)) == false)
+    {
+        context[name] = value;
+    }
+    else 
+        throw name + " is not a register name or " + value + " is not a number";
 }

@@ -8,12 +8,22 @@ module.exports = class{
             context = {"nextLine":0};
         else
             context.nextLine = 0;
-
-        function isLineExecutable(line){
-            return line.startsWith("#") == false && line.match(/\S+/g);
-        }
         
         let lines = text.split("\r\n");
+
+        let labels = {};
+        let labelPattern = new RegExp("^[A-Za-z]+:$");
+        for(let i in lines){
+            if(lines[i].match(labelPattern) != null)
+                labels[lines[i].substr(0, lines[i].length - 1)] = i;
+        }
+        
+        context.labels = labels;
+        context.stack = [];
+
+        function isLineExecutable(line){
+            return line.startsWith("#") == false && line.match(/\S+/g) != null && line.match(labelPattern) == null;
+        }
 
         while(context.nextLine < lines.length && context.__end != true){
             let line = lines[context.nextLine];
