@@ -10,5 +10,5 @@ out rx
 outstart:
 pop ra
 out ra
-check ra > 0
+check ra > 1
 jmp outstart

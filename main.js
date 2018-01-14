@@ -1,4 +1,4 @@
-const Program = require("./Program.js");
+const execMassembly = require("./Massembly.js");
 const fs = require('fs')
 
 fs.readFile('./test.m', 'utf8', function (err,data) {
@@ -6,6 +6,6 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
         return console.log("Error: " + err);
     }
 
-    let p = new Program(data);  
+    execMassembly(data);  
     console.log("Program terminated");
 });

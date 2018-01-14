@@ -1,5 +1,5 @@
 # An assembly-ish interpreter
-This is an Interpreter for a assembly like language in Nodejs.
+This is an Interpreter for a assembly like language in NodeJS
 ## List of commands
 * check num|reg op num|reg
 * jmp label
@@ -19,7 +19,7 @@ This is an Interpreter for a assembly like language in Nodejs.
 An example on how to run the interpreter check out the main.js
 ```js
 //Including the Interpreter
-const Program = require("./Program.js");
+const execMassembly = require("./Massembly.js");
 const fs = require('fs')
 
 //Load the source code from a file
@@ -28,13 +28,12 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
         return console.log("Error: " + err);
     }
 
-    let p = new Program(data); // <-- Create a program with 
+    execMassembly(data); // <-- Create a program with 
     // the source code and execute it
 });
 ```
 
 ## Example program
-This is an interpreter for a custom language which is highly inspired by assembly
 ```
 # This is how a comment looks
 mov rx 0
@@ -48,9 +47,8 @@ out rx
 outstart:
 pop ra
 out ra
-check ra > 0
+check ra > 1
 jmp outstart
-
 ```
 
 ## Extending the interpreter
