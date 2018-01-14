@@ -60,7 +60,19 @@ module.exports = {
         context.nextLine++;  
     },
     "mov":function(line, args, context){
-        setRegister(args[0], getRightHandValue(args[1], context), context);
+        let value;
+
+        if(args[1].startsWith("["))
+            value = context.memory[getRightHandValue(args[1].substr(1, args[1].length - 2), context)]; //Read memory
+        else
+            value = getRightHandValue(args[1], context); //Read regiester
+
+        if(args[0].startsWith("["))
+            context.memory[getRightHandValue(args[0].substr(1, args[0].length - 2), context)] = value; //Write memory
+
+        if(args[0].toLowerCase().startsWith("r")) //Write regiester
+            setRegister(args[0], value, context);
+
         context.nextLine++;  
     },
     "out":function(line, args, context){
@@ -82,12 +94,34 @@ module.exports = {
         setRegister(args[0], returnvalue, context);
 
         context.nextLine++;
+    },
+    "or":function(line, args, context){
+        let output = getRightHandValue(args[0], context) > 0 || getRightHandValue(args[1], context) ? 1 : 0;
+        setRegister(args[0], output, context);
+
+        context.nextLine++;
+    },
+    "and":function(line, args, context){
+        let output = getRightHandValue(args[0], context) > 0 && getRightHandValue(args[1], context) ? 1 : 0;
+        setRegister(args[0], output, context);
+
+        context.nextLine++;
+    },
+    "xor":function(line, args, context){
+        let output = getRightHandValue(args[0], context) > 0 != getRightHandValue(args[1], context) ? 1 : 0;
+        setRegister(args[0], output, context);
+
+        context.nextLine++;
+    },
+    "dbg":function(line, args, context){
+        console.log(context);
+        context.nextLine++;
     }
 }
 
 function getRightHandValue(value, context){
-    if(value.startsWith("r") && context[value] != undefined)
-        return context[value];
+    if(value.startsWith("r") && context.registers[value] != undefined)
+        return context.registers[value];
     
     let number = parseFloat(value);
     if(isNaN(number) == false)
@@ -102,7 +136,7 @@ function setRegister(name, value, context){
             "abcxyz".indexOf(name.substr(1).toLowerCase() != -1) &&
             isNaN(parseFloat(value)) == false)
     {
-        context[name] = value;
+        context.registers[name] = value;
     }
     else 
         throw name + " is not a register name or " + value + " is not a number";

@@ -18,7 +18,9 @@ module.exports = function(text, context)
     
     context.labels = labels;
     context.stack = [];
-    
+    context.memory = {};
+    context.registers = {};
+
     function isLineExecutable(line){
         return line.startsWith("#") == false && line.match(/\S+/g) != null && line.match(labelPattern) == null;
     }
