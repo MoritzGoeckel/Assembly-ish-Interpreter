@@ -73,7 +73,7 @@ out ry
 jmp conductSearch
 
 shutdown:
-end
+halt
 ```
 This will output
 ```

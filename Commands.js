@@ -122,7 +122,7 @@ module.exports = {
         console.log(getRightHandValue(args[0], context));
         context.nextLine++;
     },
-    "end":function(line, args, context){
+    "halt":function(line, args, context){
         context.__end = true;
     },
     "push":function(line, args, context){
