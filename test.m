@@ -1,4 +1,4 @@
-# This is how a comment looks
+; This is how a comment looks
 mov rx 0
 start:
 add rx 1

@@ -1,4 +1,4 @@
-# Testing memory and logic gates
+; Testing memory and logic gates
 mov rx 5
 mov [10] rx
 mov ra [10]

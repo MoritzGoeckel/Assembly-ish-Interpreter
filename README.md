@@ -26,6 +26,7 @@ This is an Interpreter for a assembly like language in Node.js
 * jmp label
 * check num|reg op num|reg
 * dbg
+* ; comment
 ## Running the interpreter
 An example on how to run the interpreter check out the main.js
 ```js
@@ -48,7 +49,7 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
 # This is how a comment looks
 mov rx 0
 
-# Loop
+; Loop
 start:
 add rx 1
 push rx
@@ -56,14 +57,14 @@ check rx < 5
 jmp start
 out rx
 
-# Another loop
+; Another loop
 outstart:
 pop ra
 out ra
 cmp ra 1
 jg outstart
 
-# Reading / Writing Memory
+; Reading / Writing Memory
 mov rx 5
 mov [10] rx
 mov ra [10]
@@ -72,7 +73,7 @@ mov [ra] 30
 mov rx [10]
 out rx
 
-# Logic gates
+; Logic gates
 mov rx 1
 mov ry 1
 xor rx ry

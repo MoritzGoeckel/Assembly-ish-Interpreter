@@ -22,7 +22,7 @@ module.exports = function(text, context)
     context.registers = {};
 
     function isLineExecutable(line){
-        return line.startsWith("#") == false && line.match(/\S+/g) != null && line.match(labelPattern) == null;
+        return line.startsWith(";") == false && line.match(/\S+/g) != null && line.match(labelPattern) == null;
     }
 
     while(context.nextLine < lines.length && context.__end != true){
