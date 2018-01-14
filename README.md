@@ -27,23 +27,6 @@ This is an Interpreter for a assembly like language in Node.js
 * check num|reg op num|reg
 * dbg
 * ; comment
-## Running the interpreter
-An example on how to run the interpreter check out the main.js
-```js
-//Including the Interpreter
-const execMassembly = require("./Massembly.js");
-const fs = require('fs')
-
-//Load the source code from a file
-fs.readFile('./test.m', 'utf8', function (err,data) {
-    if (err) {
-        return console.log("Error: " + err);
-    }
-
-    execMassembly(data); // <-- Create a program with 
-    // the source code and execute it
-});
-```
 ## Example program: Finding primes
 ```
 ;Finding prime numbers
@@ -101,6 +84,23 @@ This will output
 13
 17
 ...
+```
+## Running the interpreter
+An example on how to run the interpreter check out the main.js
+```js
+//Including the Interpreter
+const execMassembly = require("./Massembly.js");
+const fs = require('fs')
+
+//Load the source code from a file
+fs.readFile('./test.m', 'utf8', function (err,data) {
+    if (err) {
+        return console.log("Error: " + err);
+    }
+
+    execMassembly(data); // <-- Create a program with 
+    // the source code and execute it
+});
 ```
 ## Extending the interpreter
 Just extend the commands object in the Commands.js. Key is the command and value is a function receiving the entire line string, the arguments array and the context object as parameters.
