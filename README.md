@@ -1,7 +1,6 @@
 # Assembly-ish interpreter
-This is an Interpreter for an assembly like language in Node.js
-
-Its Massembly, the means for Moritz :)
+This is an Interpreter for an assembly like language in Node.js.
+It's Massembly, the stands for Moritz :)
 ## List of commands
 * mov reg|mem num|reg|mem
 * add reg num|reg
