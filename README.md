@@ -106,7 +106,7 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
 Just extend the commands object in the Commands.js. Key is the command and value is a function receiving the entire line string, the arguments array and the context object as parameters.
 
 The function can change the context, end the software and decide which line is the next to execute.
-### Implementing commands
+## Implementing commands
 ```js
 // Ending the software
 "end":function(line, args, context){
