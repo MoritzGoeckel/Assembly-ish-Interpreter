@@ -1,7 +1,7 @@
 const execMassembly = require("./Massembly.js");
 const fs = require('fs')
 
-fs.readFile('./test.m', 'utf8', function (err,data) {
+fs.readFile('./test3.m', 'utf8', function (err,data) {
     if (err) {
         return console.log("Error: " + err);
     }

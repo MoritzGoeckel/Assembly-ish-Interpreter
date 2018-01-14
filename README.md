@@ -44,40 +44,63 @@ fs.readFile('./test.m', 'utf8', function (err,data) {
     // the source code and execute it
 });
 ```
-## Example program
+## Example program: Finding primes
 ```
-; This is how a comment looks
-mov rx 0
+;Finding prime numbers
+;Sieve of Eratosthenes
 
-; Loop
+;Heighest number
+mov rm 200
+
+;Start number
+mov rs 2
+
+;Create a list with numbers
+mov ry rs
 start:
-add rx 1
-push rx
-check rx < 5
-jmp start
-out rx
+mov [ry] ry
+add ry 1
+cmp ry rm
+jle start
 
-; Another loop
-outstart:
-pop ra
-out ra
-cmp ra 1
-jg outstart
+;Set start adress
+mov ry rs
+out rs
 
-; Reading / Writing Memory
-mov rx 5
-mov [10] rx
-mov ra [10]
-add ra 5
-mov [ra] 30
-mov rx [10]
-out rx
+conductSearch:
 
-; Logic gates
-mov rx 1
-mov ry 1
-xor rx ry
-out rx
+mov rx [ry]
+mov rb ry
+deletingNonPrimes:
+add rb rx
+mov [rb] 0
+cmp rb rm
+jle deletingNonPrimes
+
+findNext:
+add ry 1
+cmp ry rm
+jg shutdown
+mov ro [ry]
+cmp ro 0
+je findNext
+
+out ry
+jmp conductSearch
+
+shutdown:
+end
+```
+This will output
+```
+2
+3
+5
+7
+11
+13
+17
+...
 ```
 ## Extending the interpreter
 Just extend the commands object in the Commands.js. Key is the command and value is a function receiving the entire line string, the arguments array and the context object as parameters.
