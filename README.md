@@ -1,5 +1,19 @@
 # An assembly-ish interpreter
 This is an Interpreter for a assembly like language in Nodejs.
+## List of commands
+check <num|reg> op <num|reg>
+jmp <label>
+add <reg> <num|reg>
+sub <reg> <num|reg>
+mul <reg> <num|reg>
+div <reg> <num|reg>
+mod <reg> <num|reg>
+mov <reg> <num|reg>
+out <num|reg>
+end
+push <num|reg>
+pop <reg>
+<label>:
 
 ## Running the interpreter
 An example on how to run the interpreter check out the main.js
