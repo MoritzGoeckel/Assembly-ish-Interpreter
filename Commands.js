@@ -133,7 +133,7 @@ function getRightHandValue(value, context){
 function setRegister(name, value, context){
     if (name.toLowerCase().startsWith("r") && 
             name.length == 2 && 
-            "abcxyz".indexOf(name.substr(1).toLowerCase() != -1) &&
+            "abcdefghijklmnopqrstovwxyz".indexOf(name.substr(1).toLowerCase() != -1) &&
             isNaN(parseFloat(value)) == false)
     {
         context.registers[name] = value;
