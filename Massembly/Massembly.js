@@ -6,8 +6,12 @@ module.exports = function(text, context)
         context = {"nextLine":0};
     else
         context.nextLine = 0;
-    
-    let lines = text.split("\r\n");
+
+    text = text.replace(/;.*/g, ''); //Delete comments
+    let lines = text.split("\r\n")
+        .filter(function(el) {return el.length != 0}); //Delete empty lines
+
+    console.log(lines);
 
     let labels = {};
     let labelPattern = new RegExp("^[A-Za-z]+:$");
@@ -22,7 +26,7 @@ module.exports = function(text, context)
     context.registers = {};
 
     function isLineExecutable(line){
-        return line.startsWith(";") == false && line.match(/\S+/g) != null && line.match(labelPattern) == null;
+        return line.match(labelPattern) == null;
     }
 
     while(context.nextLine < lines.length && context.__end != true){

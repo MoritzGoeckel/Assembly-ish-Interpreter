@@ -162,6 +162,9 @@ module.exports = {
 
         context.nextLine++;
     },
+    "nop":function(line, args, context){
+        context.nextLine++;
+    },
     "dbg":function(line, args, context){
         console.log(context);
         context.nextLine++;

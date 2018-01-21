@@ -37,7 +37,7 @@ mov ro [ry]
 cmp ro 0
 je findNext
 
-out ry
+out ry ;print the prime
 jmp conductSearch
 
 shutdown:

@@ -28,6 +28,7 @@ It's Massembly, the M stands for Moritz :)
 * check num|reg op num|reg
 * dbg
 * ; comment
+* nop
 ## Example program: Finding primes
 ```
 ;Finding prime numbers
