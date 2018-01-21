@@ -11,8 +11,6 @@ module.exports = function(text, context)
     let lines = text.split("\r\n")
         .filter(function(el) {return el.length != 0}); //Delete empty lines
 
-    console.log(lines);
-
     let labels = {};
     let labelPattern = new RegExp("^[A-Za-z]+:$");
     for(let i in lines){

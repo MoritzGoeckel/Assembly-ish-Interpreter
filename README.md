@@ -88,20 +88,25 @@ This will output
 ...
 ```
 ## Running the interpreter
-An example on how to run the interpreter check out the main.js
+### Command line
+Just execute the mexec.js with node.js and provide the source file path as parameter
+```
+node mexec.js <file>
+```
+To run the example program use
+```
+node mexec.js Examples\primesTest.m
+```
+### Javascript
+An example on how to run the interpreter from Javascript
 ```js
 //Including the Interpreter
 const execMassembly = require("./Massembly.js");
 const fs = require('fs')
 
 //Load the source code from a file
-fs.readFile('./test.m', 'utf8', function (err,data) {
-    if (err) {
-        return console.log("Error: " + err);
-    }
-
-    execMassembly(data); // <-- Create a program with 
-    // the source code and execute it
+fs.readFile('./Examples/primesTest.m', 'utf8', function (err,data) {
+    execMassembly(data); // <-- Execute the code
 });
 ```
 ## Extending the interpreter
